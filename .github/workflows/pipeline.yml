@@ -1,11 +1,11 @@
 # Nome do Workflow
-name: DevOpsLab Pipeline Teste
+name: DevOpsLab Pipeline
 
 # Evento que irá acionar a pipeline
 on: 
   push:
     branches:
-      - 05-Docker
+      - main
 
 jobs:
   Build:
