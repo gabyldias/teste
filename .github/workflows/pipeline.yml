@@ -18,16 +18,13 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.7.11'
+          python-version: '3.10'
 
       - name: Install Requirements
         run:  pip install flask
               
       - name: Unit Test
         run: python -m unittest -v test
-
-      - name: Permission
-        run: chmod +x gunicorn.sh
 
       - name: Login to Heroku Container registry
         env: 
@@ -44,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Release
+      - name: Deploy Heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web
