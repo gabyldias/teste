@@ -20,6 +20,10 @@ jobs:
         with:
           python-version: '3.7.11'
 
+      - name: Declare Envs
+        run: |
+          sed -i "s/licensekey/${{ secrets.NEW_RELIC_LICENSE_KEY }}/g" Dockerfile
+
       - name: Install Requirements
         run:  pip install flask
               
