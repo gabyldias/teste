@@ -2,7 +2,7 @@
 name: DevOpsLab Pipeline
 
 # Evento que irá acionar a pipeline
-on: 
+on:
   push:
     branches:
       - main
@@ -20,14 +20,18 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Declare Envs
+        run: |
+          sed -i "s/licensekey/${{ secrets.NEWRELIC_KEY }}/g" Dockerfile
+
       - name: Install Requirements
         run:  pip install flask
-              
+
       - name: Unit Test
         run: python -m unittest -v test
 
       - name: Login to Heroku Container registry
-        env: 
+        env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:login
 
@@ -45,3 +49,4 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web
+
