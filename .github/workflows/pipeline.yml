@@ -22,7 +22,7 @@ jobs:
 
       - name: Declare Envs
         run: |
-          sed -i "s/licensekey/${{ secrets.NEWRELIC_KEY }}/g" Dockerfile
+          sed -i "s/licensekey/${{ secrets.NEW_RELIC_LICENSE_KEY }}/g" Dockerfile
 
       - name: Install Requirements
         run:  pip install flask
